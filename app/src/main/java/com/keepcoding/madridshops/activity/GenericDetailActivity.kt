@@ -1,4 +1,4 @@
-package com.keepcoding.madridshops.generic
+package com.keepcoding.madridshops.activity
 
 import android.content.Context
 import android.content.Intent

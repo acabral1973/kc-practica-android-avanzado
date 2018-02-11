@@ -11,7 +11,7 @@ import java.util.*
 
 
 data class Shop (val id: Int, val databaseId: Int, val name: String, val description_en: String, val gps_lat: String, val gps_lon: String, val img: String, val logo_img: String, val opening_hours_en: String, val address: String)
-    : Detailable, Serializable {
+    : Detailable, Mapeable {
 
     override fun get_Image(): Int {
         return R.drawable.notification_icon_background

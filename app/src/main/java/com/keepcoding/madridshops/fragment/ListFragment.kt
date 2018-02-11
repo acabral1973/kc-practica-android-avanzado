@@ -10,7 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.keepcoding.madridshops.R
-import com.keepcoding.madridshops.generic.GenericDetailActivity
+import com.keepcoding.madridshops.activity.GenericDetailActivity
 import com.keepcoding.madridshops.adapter.ShopListRecyclerViewAdapter
 import com.keepcoding.madridshops.domain.model.Shop
 import com.keepcoding.madridshops.domain.model.Shops
