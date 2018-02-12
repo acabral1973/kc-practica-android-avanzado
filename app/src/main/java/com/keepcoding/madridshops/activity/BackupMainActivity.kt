@@ -1,7 +1,7 @@
 package com.keepcoding.madridshops.activity
+/*
 
-import android.Manifest.permission.ACCESS_COARSE_LOCATION
-import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -22,16 +22,12 @@ import com.keepcoding.madridshops.domain.interactor.ErrorCompletion
 import com.keepcoding.madridshops.domain.interactor.SuccessCompletion
 import com.keepcoding.madridshops.domain.interactor.getallshops.GetAllShopsInteractor
 import com.keepcoding.madridshops.domain.interactor.getallshops.GetAllShopsInteractorImpl
-import com.keepcoding.madridshops.domain.model.Shop
 import com.keepcoding.madridshops.domain.model.Shops
-import com.keepcoding.madridshops.fragment.GenericMapFragment
 import com.keepcoding.madridshops.fragment.ListFragment
-import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class BackupMainActivity : AppCompatActivity() {
 
-    lateinit var listFragment: ListFragment
-    lateinit var mapFragment: GenericMapFragment
+    var listFragment: ListFragment? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         val getAllShopsInteractor: GetAllShopsInteractor = GetAllShopsInteractorImpl(this)
-        getAllShopsInteractor.execute(success = object: SuccessCompletion<Shops>{
+        getAllShopsInteractor.execute(success = object: SuccessCompletion<Shops> {
             override fun successCompletion(shops: Shops) {
                 initializeMapFragment(shops)
                 initializeListFragment(shops)
@@ -51,9 +47,54 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    fun initializeMapFragment(shops: Shops) {
-        mapFragment = GenericMapFragment.newInstance<Shop>(shops.all())
-        fragmentManager.beginTransaction().replace(R.id.list_fragment, listFragment).commit()
+    fun initializeMapFragment(shops: Shops){
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment
+        mapFragment.getMapAsync({ map: GoogleMap ->
+            Log.d("MapShops", "Mapa inicializado")
+            centerMapInPosition(map, 40.416775, -3.703790)
+            map.uiSettings.isRotateGesturesEnabled = false
+            map.uiSettings.isMyLocationButtonEnabled = true
+            map.uiSettings.isZoomControlsEnabled = true
+            map.uiSettings.isMapToolbarEnabled = false
+            map.uiSettings.isZoomGesturesEnabled = false
+            showUserPosition(baseContext, map)
+
+            addShopsToMap(shops, map)
+        })
+    }
+
+    fun centerMapInPosition(map: GoogleMap, latitude: Double, longitude: Double) {
+        val cameraPosition = CameraPosition.Builder().target(LatLng(latitude, longitude)).zoom(17f).build()
+        map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+    }
+
+    fun showUserPosition(context: Context, map: GoogleMap){
+
+        ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION), 10)
+
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+            && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+            // TODO: SnackBar para reiterar que los permisos son necesarios si no los ha dado
+
+        } else {
+            map.isMyLocationEnabled = true
+        }
+    }
+
+    fun addPinToMap(map: GoogleMap, latitude: Double, longitude: Double, title: String) {
+        map.addMarker(MarkerOptions().position(LatLng(latitude, longitude)).title(title))
+    }
+
+    fun addShopsToMap(shops: Shops, map: GoogleMap){
+        for (i in 1 until shops.count()) {
+            val shop = shops.get(i)
+
+            val lat = shop.gps_lat.toDouble()
+            val long = shop.gps_lon.toDouble()
+
+            addPinToMap(map, lat,long, shop.name)
+        }
     }
 
     fun initializeListFragment(shops: Shops) {
@@ -76,4 +117,4 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-}
+}*/
