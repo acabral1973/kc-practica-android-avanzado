@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.keepcoding.madridshops.fragment.ListFragment">
+    tools:context="com.keepcoding.madridshops.fragment.GenericListFragment">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_shops"
+        android:id="@+id/generic_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="8dp"

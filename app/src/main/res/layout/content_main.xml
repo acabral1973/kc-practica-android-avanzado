@@ -10,13 +10,12 @@
     android:orientation="vertical"
     tools:showIn="@layout/activity_main">
 
-    <fragment
+    <FrameLayout
         android:id="@+id/map_fragment"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:layout_margin="@dimen/default_margin"
+        android:layout_margin="@dimen/extra_small_margin"
     />
 
     <FrameLayout

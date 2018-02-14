@@ -1,22 +1,11 @@
 package com.keepcoding.madridshops.activity
 
-import android.Manifest.permission.ACCESS_COARSE_LOCATION
-import android.Manifest.permission.ACCESS_FINE_LOCATION
-import android.content.Context
-import android.content.pm.PackageManager
+
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.CameraPosition
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MarkerOptions
 import com.keepcoding.madridshops.R
 import com.keepcoding.madridshops.domain.interactor.ErrorCompletion
 import com.keepcoding.madridshops.domain.interactor.SuccessCompletion
@@ -24,14 +13,11 @@ import com.keepcoding.madridshops.domain.interactor.getallshops.GetAllShopsInter
 import com.keepcoding.madridshops.domain.interactor.getallshops.GetAllShopsInteractorImpl
 import com.keepcoding.madridshops.domain.model.Shop
 import com.keepcoding.madridshops.domain.model.Shops
+import com.keepcoding.madridshops.fragment.GenericListFragment
 import com.keepcoding.madridshops.fragment.GenericMapFragment
-import com.keepcoding.madridshops.fragment.ListFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
-    lateinit var listFragment: ListFragment
-    lateinit var mapFragment: GenericMapFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,8 +27,8 @@ class MainActivity : AppCompatActivity() {
         val getAllShopsInteractor: GetAllShopsInteractor = GetAllShopsInteractorImpl(this)
         getAllShopsInteractor.execute(success = object: SuccessCompletion<Shops>{
             override fun successCompletion(shops: Shops) {
-                initializeMapFragment(shops)
                 initializeListFragment(shops)
+                initializeMapFragment(shops)
             }
         }, error = object : ErrorCompletion {
             override fun errorCompletion(errorMessage: String) {
@@ -52,12 +38,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun initializeMapFragment(shops: Shops) {
-        mapFragment = GenericMapFragment.newInstance<Shop>(shops.all())
-        fragmentManager.beginTransaction().replace(R.id.list_fragment, listFragment).commit()
+
+        val mapFragment: GenericMapFragment = GenericMapFragment.newInstance<Shop>(shops.all())
+        supportFragmentManager.beginTransaction().replace(R.id.map_fragment, mapFragment).commit()
     }
 
     fun initializeListFragment(shops: Shops) {
-        listFragment = ListFragment.newInstance(shops)
+        val listFragment: GenericListFragment<Shops> = GenericListFragment.newInstance<Shops>(shops)
         fragmentManager.beginTransaction().replace(R.id.list_fragment, listFragment).commit()
     }
 

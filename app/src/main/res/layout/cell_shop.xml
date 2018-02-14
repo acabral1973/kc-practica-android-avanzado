@@ -9,19 +9,24 @@
     android:layout_margin="@dimen/default_margin">
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/shop_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/default_margin"
-        android:id="@+id/shop_card">
+        android:background="@drawable/image_not_available"
+        android:backgroundTint="@color/cardview_shadow_start_color"
+        android:backgroundTintMode="src_over"
+        android:padding="@dimen/default_margin">
 
         <TextView
             android:id="@+id/shop_name"
             android:layout_width="wrap_content"
             android:layout_height="31dp"
-            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="4dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintStart_toEndOf="@+id/shop_logo"
-            app:layout_constraintTop_toTopOf="@+id/shop_logo"
+            android:textColor="@android:color/background_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             tools:text="Nombre de la tienda" />
 
         <TextView
@@ -29,23 +34,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+
+            android:layout_marginTop="4dp"
             android:layout_toEndOf="@+id/shop_name"
-            app:layout_constraintBottom_toBottomOf="@+id/shop_logo"
-            app:layout_constraintStart_toEndOf="@+id/shop_logo"
+            android:textColor="@android:color/background_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shop_name"
             tools:text="Diección de la tienda" />
 
-        <ImageView
-            android:id="@+id/shop_logo"
-            android:layout_width="72dp"
-            android:layout_height="49dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/image_not_available" />
 
     </android.support.constraint.ConstraintLayout>
 

@@ -1,11 +1,19 @@
 package com.keepcoding.madridshops.domain.model
 
-import com.keepcoding.madridshops.domain.R
 import java.io.Serializable
 import java.util.*
 
-data class Shop (val id: Int, val databaseId: Int, val name: String, val description_en: String, val gps_lat: String, val gps_lon: String, val img: String, val logo_img: String, val opening_hours_en: String, val address: String)
-    : Detailable, Mapeable, Serializable {
+data class Shop (val id: Int, val databaseId: Int,
+                 val name: String,
+                 val description_en: String,
+                 val gps_lat: String,
+                 val gps_lon: String,
+                 val img: String,
+                 val logo_img: String,
+                 val opening_hours_en: String,
+                 val address: String)
+
+    : Detailable, Mapeable {
 
     override fun get_Lat(): String {
         return gps_lat
@@ -41,7 +49,7 @@ data class Shop (val id: Int, val databaseId: Int, val name: String, val descrip
     }
 }
 
-class Shops(val shops: MutableList<Shop>): Aggregate<Shop> {
+class Shops(val shops: MutableList<Shop>): Serializable, Aggregate<Shop> {
 
     override fun count(): Int = shops.size
 

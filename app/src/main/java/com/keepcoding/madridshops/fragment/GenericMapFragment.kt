@@ -1,7 +1,6 @@
 package com.keepcoding.madridshops.fragment
 
 import android.Manifest
-import android.app.Fragment
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -16,12 +15,9 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.keepcoding.madridshops.R
 import com.keepcoding.madridshops.domain.model.Mapeable
-import com.keepcoding.madridshops.domain.model.Shops
-import java.io.Serializable
 
-class GenericMapFragment: SupportMapFragment(){
+class GenericMapFragment: SupportMapFragment() {
     companion object {
         private val ARG_NAME = "ARG_NAME"
         private val ARG_LAT = "ARG_LAT"
@@ -30,11 +26,11 @@ class GenericMapFragment: SupportMapFragment(){
         public fun <T: Mapeable> newInstance(content: List<T>): GenericMapFragment  {
             val fragment = GenericMapFragment()
             val arguments = Bundle()
-            var nameList = ArrayList<String>()
-            var latList = ArrayList<String>()
-            var lonList = ArrayList<String>()
+            val nameList = ArrayList<String>()
+            val latList = ArrayList<String>()
+            val lonList = ArrayList<String>()
 
-            for (i in 0..content.count()) {
+            for (i in 0 until content.count()) {
                 nameList.add(content[i].get_Name())
                 latList.add(content[i].get_Lat())
                 lonList.add(content[i].get_Lon())
@@ -50,21 +46,15 @@ class GenericMapFragment: SupportMapFragment(){
 
     }
 
-    lateinit var fragmentView: View
-    lateinit var map: GoogleMap
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        val fragmentView = super.onCreateView(inflater, container, savedInstanceState)
+        val nameList: ArrayList<String> = arguments.getStringArrayList(ARG_NAME)
+        val latList: ArrayList<String> = arguments.getStringArrayList(ARG_LAT)
+        val lonList: ArrayList<String> = arguments.getStringArrayList(ARG_LON)
 
-        if (inflater != null) {
-            fragmentView = inflater.inflate(R.layout.generic_fragment_map, container, false)
-
-            val nameList: ArrayList<String> = arguments.getStringArrayList(ARG_NAME)
-            val latList: ArrayList<String> = arguments.getStringArrayList(ARG_LAT)
-            val lonList: ArrayList<String> = arguments.getStringArrayList(ARG_LON)
-        }
-
-
+        setupMap(nameList, latList, lonList)
 
         return fragmentView
     }

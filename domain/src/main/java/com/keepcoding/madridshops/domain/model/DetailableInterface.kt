@@ -1,6 +1,8 @@
 package com.keepcoding.madridshops.domain.model
 
-interface Detailable {
+import java.io.Serializable
+
+interface Detailable : Serializable {
     fun get_Image(): Int
     fun get_Name(): String
     fun get_Address(): String
