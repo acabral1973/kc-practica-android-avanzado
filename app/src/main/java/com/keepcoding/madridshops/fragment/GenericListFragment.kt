@@ -39,7 +39,7 @@ class GenericListFragment <T: Serializable>: Fragment() {
                               savedInstanceState: Bundle?): View? {
 
         if (inflater != null) {
-            fragmentView = inflater.inflate(R.layout.generic_fragment_list, container, false)
+            fragmentView = inflater.inflate(R.layout.fragment_generic_list, container, false)
             recyclerViewContent = fragmentView.findViewById(R.id.generic_recycler_view)
             val content = arguments.getSerializable(ARG_CONTENT) as Shops
             val adapter =  GenericListRecyclerViewAdapter(content)

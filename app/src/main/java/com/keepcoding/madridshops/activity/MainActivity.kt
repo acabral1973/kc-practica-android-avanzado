@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
     fun initializeMapFragment(shops: Shops) {
 
-        val mapFragment: GenericMapFragment = GenericMapFragment.newInstance<Shop>(shops.all())
+        val mapFragment: GenericMapFragment<Shop> = GenericMapFragment.newInstance<Shop>(shops.all())
         supportFragmentManager.beginTransaction().replace(R.id.map_fragment, mapFragment).commit()
     }
 

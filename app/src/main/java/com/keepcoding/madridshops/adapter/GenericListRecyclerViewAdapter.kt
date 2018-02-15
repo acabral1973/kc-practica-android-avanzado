@@ -1,21 +1,26 @@
 package com.keepcoding.madridshops.adapter
 
+import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import com.keepcoding.madridshops.R
 import com.keepcoding.madridshops.domain.model.Aggregate
 import com.keepcoding.madridshops.domain.model.Detailable
+import com.squareup.picasso.Picasso
 
 class GenericListRecyclerViewAdapter<Z: Detailable, T: Aggregate<Z>>(val content: T) : RecyclerView.Adapter<GenericListRecyclerViewAdapter<Z,T>.ContentViewHolder>() {
 
     var onClickListener : View.OnClickListener? = null
+    lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ContentViewHolder {
-        val view = LayoutInflater.from(parent?.context).inflate(R.layout.cell_shop, parent, false)
+        val view = LayoutInflater.from(parent?.context).inflate(R.layout.cell_generic, parent, false)
         view.setOnClickListener(onClickListener)
+        context = parent!!.getContext()
         return ContentViewHolder(view)
     }
 
@@ -34,14 +39,15 @@ class GenericListRecyclerViewAdapter<Z: Detailable, T: Aggregate<Z>>(val content
 
     inner class ContentViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        // val shopLogo = itemView.findViewById<ImageView>(R.id.shop_logo)
-        val shopName = itemView.findViewById<TextView>(R.id.shop_name)
-        val shopAddress = itemView.findViewById<TextView>(R.id.shop_address)
+        val contentimage = itemView.findViewById<ImageView>(R.id.content_image)
+        val contentName = itemView.findViewById<TextView>(R.id.content_name)
+        val contentAddress = itemView.findViewById<TextView>(R.id.content_address)
 
-        fun bindShop(image: Int, name: String, address: String) {
-         //   shopLogo.setImageResource(R.drawable.image_not_available)
-            shopName.text = name
-            shopAddress.text = address
+        fun bindShop(image: String, name: String, address: String) {
+
+            Picasso.with(context).load(image).placeholder(android.R.drawable.alert_dark_frame).into(contentimage)
+            contentName.text = name
+            contentAddress.text = address
         }
     }
 }

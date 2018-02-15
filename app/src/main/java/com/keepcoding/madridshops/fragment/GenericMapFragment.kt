@@ -14,31 +14,21 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.keepcoding.madridshops.activity.GenericDetailActivity
 import com.keepcoding.madridshops.domain.model.Mapeable
 
-class GenericMapFragment: SupportMapFragment() {
+class GenericMapFragment<T: Mapeable>: SupportMapFragment() {
     companion object {
-        private val ARG_NAME = "ARG_NAME"
-        private val ARG_LAT = "ARG_LAT"
-        private val ARG_LON = "ARG_LON"
+        private val ARG_CONTENT = "ARG_CONTENT"
 
-        public fun <T: Mapeable> newInstance(content: List<T>): GenericMapFragment  {
-            val fragment = GenericMapFragment()
+        public fun <T: Mapeable> newInstance(content: ArrayList<T>): GenericMapFragment<T> {
+
+            val fragment = GenericMapFragment<T>()
             val arguments = Bundle()
-            val nameList = ArrayList<String>()
-            val latList = ArrayList<String>()
-            val lonList = ArrayList<String>()
 
-            for (i in 0 until content.count()) {
-                nameList.add(content[i].get_Name())
-                latList.add(content[i].get_Lat())
-                lonList.add(content[i].get_Lon())
-            }
-
-            arguments.putStringArrayList(ARG_NAME, nameList)
-            arguments.putStringArrayList(ARG_LAT, latList)
-            arguments.putStringArrayList(ARG_LON, lonList)
+            arguments.putSerializable(ARG_CONTENT, content)
             fragment.arguments = arguments
 
             return fragment
@@ -50,17 +40,15 @@ class GenericMapFragment: SupportMapFragment() {
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val fragmentView = super.onCreateView(inflater, container, savedInstanceState)
-        val nameList: ArrayList<String> = arguments.getStringArrayList(ARG_NAME)
-        val latList: ArrayList<String> = arguments.getStringArrayList(ARG_LAT)
-        val lonList: ArrayList<String> = arguments.getStringArrayList(ARG_LON)
+        val content = arguments.getSerializable(ARG_CONTENT) as ArrayList<T>
 
-        setupMap(nameList, latList, lonList)
+        setupMap(content)
 
         return fragmentView
     }
 
 
-    private fun setupMap(nameList: List<String>, latList: List<String>, lonList: List<String> ){
+    private fun setupMap(content: ArrayList<T> ){
 
         getMapAsync({ map: GoogleMap ->
             Log.d("MapShops", "Mapa inicializado")
@@ -71,16 +59,16 @@ class GenericMapFragment: SupportMapFragment() {
             map.uiSettings.isMapToolbarEnabled = false
             map.uiSettings.isZoomGesturesEnabled = false
             showUserPosition(activity, map)
-            addPointsToMap(nameList, latList, lonList, map)
+            addPointsToMap(content, map)
         })
     }
 
-    fun centerMapInPosition(map: GoogleMap, latitude: Double, longitude: Double) {
+    private fun centerMapInPosition(map: GoogleMap, latitude: Double, longitude: Double) {
         val cameraPosition = CameraPosition.Builder().target(LatLng(latitude, longitude)).zoom(17f).build()
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
     }
 
-    fun showUserPosition(context: Context, map: GoogleMap){
+    private fun showUserPosition(context: Context, map: GoogleMap){
 
         ActivityCompat.requestPermissions(activity, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION), 10)
 
@@ -94,23 +82,35 @@ class GenericMapFragment: SupportMapFragment() {
         }
     }
 
-    fun addPinToMap(map: GoogleMap, latitude: Double, longitude: Double, title: String) {
-        map.addMarker(MarkerOptions().position(LatLng(latitude,longitude)).title(title))
+    private fun addPinToMap(map: GoogleMap, elementToShow: T) {
+
+        val name = elementToShow.get_Name()
+        val lat = elementToShow.get_Lat().toDouble()
+        val lon = elementToShow.get_Lon().toDouble()
+
+        val mappedMarker = map.addMarker(MarkerOptions().position(LatLng(lat,lon)).title(name))
+        mappedMarker.tag = elementToShow
+
+
+        map.setOnInfoWindowClickListener {
+            onInfoWindowClick(it)
+        }
+
     }
 
-    fun addPointsToMap(nameList: List<String>, latList: List<String>, lonList: List<String>, map: GoogleMap){
+    private fun addPointsToMap(content: ArrayList<T>, map: GoogleMap){
 
-        val pointsQuantity = nameList.count()
+        val pointsQuantity = content.count()
 
         for (i in 1 until pointsQuantity) {
-            val name = nameList[i]
-            val lat = latList[i].toDouble()
-            val lon = lonList[i].toDouble()
-
-            addPinToMap(map, lat, lon, name)
+            addPinToMap(map, content.get(i))
         }
     }
 
+    private fun onInfoWindowClick(marker: Marker) {
 
+        val elementToShow = marker.tag as T
+        startActivity(GenericDetailActivity.intent<T>(activity, elementToShow))
+    }
 
 }
