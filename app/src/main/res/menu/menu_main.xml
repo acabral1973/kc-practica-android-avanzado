@@ -3,8 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="madridshops.keepcoding.com.madridshops.MainActivity">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:id="@+id/action_shops"
+        android:title="@string/shops"
+        app:showAsAction="always"
+
+    />
+    <item
+        android:id="@+id/action_activities"
+        android:title="@string/activities"
+        app:showAsAction="always"
+    />
 </menu>

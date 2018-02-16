@@ -1,7 +1,7 @@
 package com.keepcoding.madridshops.repository
 
 interface SuccessCompletion<T> {
-    fun successCompletion(e: T)
+    fun successCompletion(entity: T)
 }
 
 interface ErrorCompletion {

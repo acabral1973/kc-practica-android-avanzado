@@ -33,7 +33,7 @@ class RepositoryImpl(context: Context): Repository{
         // hago una petición de datos a la red
 
         val jsonManager : GetJsonManager = GetJsonManagerVolleyImpl(weakContext.get() !!)
-        jsonManager.execute(BuildConfig.MADRID_SHOPS_SERVER_URL, success = object : SuccessCompletion<String> {
+        jsonManager.execute(BuildConfig.MADRID_ACTIVITIES_SERVER_URL, success = object : SuccessCompletion<String> {
             override fun successCompletion(shopsJson: String) {
 
                 val parser = JsonEntitiesParser()

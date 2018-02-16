@@ -30,6 +30,7 @@ class GenericDetailActivity : AppCompatActivity() {
             intent.putExtra(EXTRA_DESCRIPTION, content.get_Description())
             intent.putExtra(EXTRA_HOURES, content.get_Houres())
             intent.putExtra(EXTRA_LOGO, content.get_logo())
+            intent.putExtra(EXTRA_IMAGE, content.get_Image())
             this.context = context
             return intent
         }
@@ -44,9 +45,12 @@ class GenericDetailActivity : AppCompatActivity() {
         val houresExtra = intent.getStringExtra(EXTRA_HOURES)
         val descriptionExtra = intent.getStringExtra(EXTRA_DESCRIPTION)
         val logoExtra = intent.getStringExtra(EXTRA_LOGO)
+        val imageExtra = intent.getStringExtra(EXTRA_IMAGE)
+
 
         supportActionBar?.title = "Detalles"
         Picasso.with(context).load(logoExtra).placeholder(android.R.drawable.alert_dark_frame).into(logo)
+        Picasso.with(context).load(imageExtra).placeholder(android.R.drawable.alert_dark_frame).into(image)
         name.text = nameExtra
         address.text = addressExtra
         houres.text = houresExtra

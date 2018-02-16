@@ -1,5 +1,6 @@
 package com.keepcoding.madridshops.activity
 
+/*
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -17,16 +18,13 @@ import com.keepcoding.madridshops.fragment.GenericListFragment
 import com.keepcoding.madridshops.fragment.GenericMapFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class BackupMainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-        initializeShops()
-    }
 
-    fun initializeShops() {
         val getAllShopsInteractor: GetAllShopsInteractor = GetAllShopsInteractorImpl(this)
         getAllShopsInteractor.execute(success = object: SuccessCompletion<Shops>{
             override fun successCompletion(shops: Shops) {
@@ -39,7 +37,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
-
 
     fun initializeMapFragment(shops: Shops) {
 
@@ -59,17 +56,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        when (item.itemId) {
-            R.id.action_shops -> {
-                initializeShops()
-                return true
-            }
-            R.id.action_activities -> {
-                return true
-            }
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        return when (item.itemId) {
+            R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
-        return true
     }
 }
+*/
