@@ -3,7 +3,7 @@ package com.keepcoding.madridshops.repository.model
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class ShopEntity(
+data class DataEntity(
         val id: Long,
         val databaseId: Long,
         val name: String,

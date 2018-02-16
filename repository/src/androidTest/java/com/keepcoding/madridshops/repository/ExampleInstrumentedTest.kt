@@ -5,7 +5,7 @@ import android.support.test.runner.AndroidJUnit4
 import android.util.Log
 import com.keepcoding.madridshops.repository.db.build
 import com.keepcoding.madridshops.repository.db.dao.ShopDAO
-import com.keepcoding.madridshops.repository.model.ShopEntity
+import com.keepcoding.madridshops.repository.model.DataEntity
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -24,7 +24,7 @@ class ExampleInstrumentedTest {
     @Throws(Exception::class)
     fun given_valid_shopentity_it_gets_inserted_correctly() {
 
-        val shop = ShopEntity(1,1,"My shop", ""
+        val shop = DataEntity(1,1,"My shop", ""
                 , 1.0f, 2.0f,"","", "", "")
 
         val shopEntityDao = ShopDAO(dbhelper)
@@ -45,11 +45,11 @@ class ExampleInstrumentedTest {
 
         // val deletedAll = shopEntityDao.deleteAll()
 
-        val shop = ShopEntity(1,1,"My shop 1", "desc 1"
+        val shop = DataEntity(1,1,"My shop 1", "desc 1"
                 , 1.0f, 2.0f,"","", "", "")
 
 
-        val shop2 = ShopEntity(2,1,"My shop 2", "desc 2"
+        val shop2 = DataEntity(2,1,"My shop 2", "desc 2"
                 , 1.0f, 2.0f,"","", "", "")
 
 

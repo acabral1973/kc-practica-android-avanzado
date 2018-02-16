@@ -3,6 +3,7 @@ package com.keepcoding.madridshops.repository.db
 
 object DBConstants {
     val TABLE_SHOP = "SHOP"
+    val TABLE_ACTIVITY = "ACTIVITY"
 
     // Table field constants
     val KEY_SHOP_DATABASE_ID = "_id"
@@ -45,7 +46,23 @@ object DBConstants {
                     + KEY_SHOP_OPENING_HOURS + " text "
                     + ");")
 
+    val SQL_SCRIPT_CREATE_ACTIVITY_TABLE = (
+            "create table " + TABLE_ACTIVITY
+                    + "( "
+                    + KEY_SHOP_DATABASE_ID + " integer primary key autoincrement, "
+                    + KEY_SHOP_ID_JSON + " integer,"
+                    + KEY_SHOP_NAME + " text not null,"
+                    + KEY_SHOP_IMAGE_URL + " text, "
+                    + KEY_SHOP_LOGO_IMAGE_URL + " text, "
+                    + KEY_SHOP_ADDRESS + " text,"
+                    + KEY_SHOP_URL + " text,"
+                    + KEY_SHOP_LATITUDE + " real,"
+                    + KEY_SHOP_LONGITUDE + " real, "
+                    + KEY_SHOP_DESCRIPTION + " text, "
+                    + KEY_SHOP_OPENING_HOURS + " text "
+                    + ");")
+
     val DROP_DATABASE_SCRIPTS = ""
-    val CREATE_DATABASE_SCRIPTS = arrayOf(SQL_SCRIPT_CREATE_SHOP_TABLE)
+    val CREATE_DATABASE_SCRIPTS = arrayOf(SQL_SCRIPT_CREATE_SHOP_TABLE, SQL_SCRIPT_CREATE_ACTIVITY_TABLE)
 }
 

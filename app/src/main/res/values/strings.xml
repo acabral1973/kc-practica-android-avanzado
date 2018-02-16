@@ -10,6 +10,6 @@
     <string name="address">Dirección</string>
     <string name="name">Nombre</string>
     <string name="logo">Logo</string>
-    <string name="shops">Tiendas</string>
+    <string name="data">Tiendas</string>
     <string name="activities">Actividades</string>
 </resources>

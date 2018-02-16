@@ -3,6 +3,6 @@ package com.keepcoding.madridshops.repository.model
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-internal class ShopsResponseEntity(
-    val result: MutableList<ShopEntity>
+internal class DataResponseEntity(
+    val result: MutableList<DataEntity>
 )

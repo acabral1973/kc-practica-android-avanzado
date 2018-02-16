@@ -1,7 +1,7 @@
 package com.keepcoding.madridshops
 
-import com.keepcoding.madridshops.repository.model.ShopEntity
-import com.keepcoding.madridshops.repository.model.ShopsResponseEntity
+import com.keepcoding.madridshops.repository.model.DataEntity
+import com.keepcoding.madridshops.repository.model.DataResponseEntity
 import com.keepcoding.madridshops.repository.network.json.JsonEntitiesParser
 import com.keepcoding.madridshops.util.ReadJsonFile
 import junit.framework.Assert.*
@@ -21,7 +21,7 @@ class JSONParsingTest {
 
         // hago el parseo usando la librería Jakson Json
         val parser = JsonEntitiesParser()
-        val shop = parser.parse<ShopEntity>(shopsJson)
+        val shop = parser.parse<DataEntity>(shopsJson)
 
         assertNotNull(shop)
         assertEquals("Cortefiel - Preciados",shop.name)
@@ -41,7 +41,7 @@ class JSONParsingTest {
 
         // hago el parseo usando la librería Jakson Json
         val parser = JsonEntitiesParser()
-        val shop = parser.parse<ShopEntity>(shopsJson)
+        val shop = parser.parse<DataEntity>(shopsJson)
 
         assertNotNull(shop)
         assertEquals("Cortefiel - Preciados",shop.name)
@@ -60,7 +60,7 @@ class JSONParsingTest {
 
         // hago el parseo usando la librería Jakson Json
         val parser = JsonEntitiesParser()
-        val responseEntity = parser.parse<ShopsResponseEntity>(shopsJson)
+        val responseEntity = parser.parse<DataResponseEntity>(shopsJson)
 
         assertNotNull(responseEntity)
         assertEquals(6, responseEntity.result.count())

@@ -4,7 +4,7 @@
     tools:context="madridshops.keepcoding.com.madridshops.MainActivity">
     <item
         android:id="@+id/action_shops"
-        android:title="@string/shops"
+        android:title="@string/data"
         app:showAsAction="always"
 
     />

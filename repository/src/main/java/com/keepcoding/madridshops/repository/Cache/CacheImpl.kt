@@ -5,53 +5,54 @@ import com.keepcoding.madridshops.repository.DispatchOnMainThread
 import com.keepcoding.madridshops.repository.db.DBHelper
 import com.keepcoding.madridshops.repository.db.build
 import com.keepcoding.madridshops.repository.db.dao.ShopDAO
-import com.keepcoding.madridshops.repository.model.ShopEntity
+import com.keepcoding.madridshops.repository.model.DataEntity
 import java.lang.ref.WeakReference
 
 internal class CacheImpl(context: Context): Cache{
 
     val context = WeakReference<Context>(context)
 
-    override fun getAllShops(success: (shops: List<ShopEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
-        // pido todas las shops del cache en segundo plano
+    override fun getAllEntities(table: String, success: (data: List<DataEntity>) -> Unit, error: (errorMessage: String) -> Unit) {
+
+        // pido todas los datos del cache en segundo plano
         Thread(Runnable {
             // pido todas las tiendas usando DAO (Data Access Object) definido en el package db
-            var shops = ShopDAO(cacheDBHelper()).query()
+            var entities = ShopDAO(cacheDBHelper()).query(table)
 
             // una vez ejecutado el borrado vuelvo al hilo principal
             DispatchOnMainThread(Runnable {
-                if (shops.count() > 0 ) {
-                    success(shops)
+                if (entities.count() > 0 ) {
+                    success(entities)
                 } else {
-                    error("No shop in cache")
+                    error("No data in cache")
                 }
             })
         }).run()
     }
 
-    override fun saveAllShops(shops: List<ShopEntity>, success: () -> Unit, error: (errorMessage: String) -> Unit) {
-        // grabo todas las shops del cache en segundo plano
+    override fun saveAllEntities(table: String, data: List<DataEntity>, success: () -> Unit, error: (errorMessage: String) -> Unit) {
+        // grabo todas las data del cache en segundo plano
         Thread(Runnable {
             try {
-                // recorro la lista de shops usando DAO (Data Access Object) definido en el package db
-                shops.forEach { ShopDAO(cacheDBHelper()).insert(it) }
+                // recorro la lista de data usando DAO (Data Access Object) definido en el package db
+                data.forEach { ShopDAO(cacheDBHelper()).insert(it, table) }
                 DispatchOnMainThread(Runnable {
                     success()
                 })
             } catch (e: Exception) {
                 DispatchOnMainThread(Runnable {
-                    error("Error saving shops in cache")
+                    error("Error saving data in cache")
                 })
             }
         }).run()
     }
 
-    override fun deleteAllShops(success: () -> Unit, error: (errorMessage: String) -> Unit) {
+    override fun deleteAllEntities(table: String, success: () -> Unit, error: (errorMessage: String) -> Unit) {
 
         // mando el borrado de cache en segundo plano
         Thread(Runnable {
             // borro todas las tiendas usando DAO (Data Access Object) definido en el package db
-            var successDeleting = ShopDAO(cacheDBHelper()).deleteAll()
+            var successDeleting = ShopDAO(cacheDBHelper()).deleteAll(table)
 
             // una vez ejecutado el borrado vuelvo al hilo principal
             DispatchOnMainThread(Runnable {

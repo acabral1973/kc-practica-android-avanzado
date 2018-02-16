@@ -7,7 +7,7 @@ import com.keepcoding.madridshops.domain.model.Shop
 import com.keepcoding.madridshops.domain.model.Shops
 import com.keepcoding.madridshops.repository.Repository
 import com.keepcoding.madridshops.repository.RepositoryImpl
-import com.keepcoding.madridshops.repository.model.ShopEntity
+import com.keepcoding.madridshops.repository.model.DataEntity
 import java.lang.ref.WeakReference
 
 class GetAllShopsInteractorImpl(context: Context) : GetAllShopsInteractor {
@@ -24,7 +24,7 @@ class GetAllShopsInteractorImpl(context: Context) : GetAllShopsInteractor {
         })
     }
 
-    private fun entityMapper(list: List<ShopEntity>): Shops {
+    private fun entityMapper(list: List<DataEntity>): Shops {
 
         val tempList = ArrayList <Shop>()
         list.forEach {

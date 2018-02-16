@@ -1,9 +1,9 @@
 package com.keepcoding.madridshops.repository.Cache
 
-import com.keepcoding.madridshops.repository.model.ShopEntity
+import com.keepcoding.madridshops.repository.model.DataEntity
 
 internal interface Cache {
-    fun getAllShops(success: (shops: List<ShopEntity>) -> Unit, error: (errorMessage: String) -> Unit)
-    fun saveAllShops(shops: List<ShopEntity>, success: () -> Unit, error: (errorMessage: String) -> Unit)
-    fun deleteAllShops(success: () -> Unit, error: (errorMessage: String) -> Unit)
+    fun getAllEntities(table: String, success: (data: List<DataEntity>) -> Unit, error: (errorMessage: String) -> Unit)
+    fun saveAllEntities(table: String, data: List<DataEntity>, success: () -> Unit, error: (errorMessage: String) -> Unit)
+    fun deleteAllEntities(table: String, success: () -> Unit, error: (errorMessage: String) -> Unit)
 }
