@@ -12,8 +12,8 @@ import android.view.ViewGroup
 import com.keepcoding.madridshops.R
 import com.keepcoding.madridshops.activity.GenericDetailActivity
 import com.keepcoding.madridshops.adapter.GenericListRecyclerViewAdapter
-import com.keepcoding.madridshops.domain.model.Shop
-import com.keepcoding.madridshops.domain.model.Shops
+import com.keepcoding.madridshops.domain.model.MadridShopEntity
+import com.keepcoding.madridshops.domain.model.MadridShopEntities
 import java.io.Serializable
 
 class GenericListFragment <T: Serializable>: Fragment() {
@@ -41,12 +41,12 @@ class GenericListFragment <T: Serializable>: Fragment() {
         if (inflater != null) {
             fragmentView = inflater.inflate(R.layout.fragment_generic_list, container, false)
             recyclerViewContent = fragmentView.findViewById(R.id.generic_recycler_view)
-            val content = arguments.getSerializable(ARG_CONTENT) as Shops
+            val content = arguments.getSerializable(ARG_CONTENT) as MadridShopEntities
             val adapter =  GenericListRecyclerViewAdapter(content)
             adapter.onClickListener = View.OnClickListener { view ->
                 val position = recyclerViewContent.getChildAdapterPosition(view)
                 val contentToShow = content.get(position)
-                startActivity(GenericDetailActivity.intent<Shop>(activity, contentToShow))
+                startActivity(GenericDetailActivity.intent<MadridShopEntity>(activity, contentToShow))
             }
             recyclerViewContent.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
             recyclerViewContent.itemAnimator = DefaultItemAnimator()

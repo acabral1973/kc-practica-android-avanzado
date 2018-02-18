@@ -18,15 +18,15 @@ class MadridShopsApp: MultiDexApplication() {
 
    val allShopsInteractor = GetAllShopsInteractorImpl(this)
 
-   allShopsInteractor.execute(object: SuccessCompletion<Shops> {
-       override fun successCompletion(shops: Shops) {
-           Log.d("Shops", "Success downloading  shops - Count: " + shops.count())
+   allShopsInteractor.execute(object: SuccessCompletion<MadridShopEntities> {
+       override fun successCompletion(madridShopEntities: MadridShopEntities) {
+           Log.d("MadridShopEntities", "Success downloading  madridShopEntities - Count: " + madridShopEntities.count())
 
-           shops.shops.forEach { Log.d("Shops", "Downloading data for Shop:" +  it.name) }
+           madridShopEntities.madridShopEntities.forEach { Log.d("MadridShopEntities", "Downloading data for MadridShopEntity:" +  it.name) }
        }
    }, object: ErrorCompletion {
        override fun errorCompletion(errorMessage: String) {
-           Log.d("Shops", "Error downloading shops : " + errorMessage)
+           Log.d("MadridShopEntities", "Error downloading madridShopEntities : " + errorMessage)
        }
    })
 
@@ -34,9 +34,9 @@ class MadridShopsApp: MultiDexApplication() {
 
 
    DeleteAllShopsImpl(this).execute(success = {
-       Log.d("Shops", "All Shops was deleted")
+       Log.d("MadridShopEntities", "All MadridShopEntities was deleted")
    }, error = {
-       Log.d("Shops", "Error deleting all Shops")
+       Log.d("MadridShopEntities", "Error deleting all MadridShopEntities")
    })
 
    */

@@ -1,4 +1,4 @@
-package com.keepcoding.madridshops.domain.model
+package com.keepcoding.madridshops.domain.interactor.getallshops
 
 
 object TypeConstants {

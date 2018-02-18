@@ -84,10 +84,10 @@ class GenericMapFragment<T: Mapeable>: SupportMapFragment() {
 
     private fun addPinToMap(map: GoogleMap, elementToShow: T) {
 
-        val name = elementToShow.get_Name()
-        val address = elementToShow.get_Address()
-        val lat = elementToShow.get_Lat().toDouble()
-        val lon = elementToShow.get_Lon().toDouble()
+        val name = elementToShow.getEntityName()
+        val address = elementToShow.getEntityAddress()
+        val lat = elementToShow.getEntityLat().toDouble()
+        val lon = elementToShow.getEntityLon().toDouble()
 
         val mappedMarker = map.addMarker(MarkerOptions().position(LatLng(lat,lon)).title(name).snippet(address))
         mappedMarker.tag = elementToShow

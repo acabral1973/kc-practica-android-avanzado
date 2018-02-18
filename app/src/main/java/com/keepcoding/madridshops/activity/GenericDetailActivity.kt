@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.keepcoding.madridshops.R
-import com.keepcoding.madridshops.domain.model.Detailable
+import com.keepcoding.madridshops.domain.model.Mapeable
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_generic_detail.*
 
@@ -21,16 +21,16 @@ class GenericDetailActivity : AppCompatActivity() {
         private val EXTRA_DESCRIPTION = "EXTRA_DESCRIPTION"
         lateinit var context: Context
 
-        fun <T: Detailable> intent(context: Context, content: T): Intent {
+        fun <T: Mapeable> intent(context: Context, content: T): Intent {
 
             val intent = Intent(context, GenericDetailActivity::class.java)
 
-            intent.putExtra(EXTRA_NAME, content.get_Name())
-            intent.putExtra(EXTRA_ADDRESS, content.get_Address())
-            intent.putExtra(EXTRA_DESCRIPTION, content.get_Description())
-            intent.putExtra(EXTRA_HOURES, content.get_Houres())
-            intent.putExtra(EXTRA_LOGO, content.get_logo())
-            intent.putExtra(EXTRA_IMAGE, content.get_Image())
+            intent.putExtra(EXTRA_NAME, content.getEntityName())
+            intent.putExtra(EXTRA_ADDRESS, content.getEntityAddress())
+            intent.putExtra(EXTRA_DESCRIPTION, content.getEntityDescription())
+            intent.putExtra(EXTRA_HOURES, content.getEntityHoures())
+            intent.putExtra(EXTRA_LOGO, content.getEntityLogo())
+            intent.putExtra(EXTRA_IMAGE, content.getEntityImage())
             this.context = context
             return intent
         }

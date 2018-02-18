@@ -12,8 +12,8 @@ import com.keepcoding.madridshops.domain.interactor.ErrorCompletion
 import com.keepcoding.madridshops.domain.interactor.SuccessCompletion
 import com.keepcoding.madridshops.domain.interactor.getallshops.GetAllShopsInteractor
 import com.keepcoding.madridshops.domain.interactor.getallshops.GetAllShopsInteractorImpl
-import com.keepcoding.madridshops.domain.model.Shop
-import com.keepcoding.madridshops.domain.model.Shops
+import com.keepcoding.madridshops.domain.model.MadridShopEntity
+import com.keepcoding.madridshops.domain.model.MadridShopEntities
 import com.keepcoding.madridshops.fragment.GenericListFragment
 import com.keepcoding.madridshops.fragment.GenericMapFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -26,10 +26,10 @@ class BackupMainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         val getAllShopsInteractor: GetAllShopsInteractor = GetAllShopsInteractorImpl(this)
-        getAllShopsInteractor.execute(success = object: SuccessCompletion<Shops>{
-            override fun successCompletion(shops: Shops) {
-                initializeListFragment(shops)
-                initializeMapFragment(shops)
+        getAllShopsInteractor.execute(success = object: SuccessCompletion<MadridShopEntities>{
+            override fun successCompletion(madridShopEntities: MadridShopEntities) {
+                initializeListFragment(madridShopEntities)
+                initializeMapFragment(madridShopEntities)
             }
         }, error = object : ErrorCompletion {
             override fun errorCompletion(errorMessage: String) {
@@ -38,14 +38,14 @@ class BackupMainActivity : AppCompatActivity() {
         })
     }
 
-    fun initializeMapFragment(shops: Shops) {
+    fun initializeMapFragment(madridShopEntities: MadridShopEntities) {
 
-        val mapFragment: GenericMapFragment<Shop> = GenericMapFragment.newInstance<Shop>(shops.all())
+        val mapFragment: GenericMapFragment<MadridShopEntity> = GenericMapFragment.newInstance<MadridShopEntity>(madridShopEntities.all())
         supportFragmentManager.beginTransaction().replace(R.id.map_fragment, mapFragment).commit()
     }
 
-    fun initializeListFragment(shops: Shops) {
-        val listFragment: GenericListFragment<Shops> = GenericListFragment.newInstance<Shops>(shops)
+    fun initializeListFragment(madridShopEntities: MadridShopEntities) {
+        val listFragment: GenericListFragment<MadridShopEntities> = GenericListFragment.newInstance<MadridShopEntities>(madridShopEntities)
         fragmentManager.beginTransaction().replace(R.id.list_fragment, listFragment).commit()
     }
 

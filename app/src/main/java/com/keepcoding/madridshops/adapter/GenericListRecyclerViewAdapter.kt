@@ -9,10 +9,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.keepcoding.madridshops.R
 import com.keepcoding.madridshops.domain.model.Aggregate
-import com.keepcoding.madridshops.domain.model.Detailable
+import com.keepcoding.madridshops.domain.model.Mapeable
 import com.squareup.picasso.Picasso
 
-class GenericListRecyclerViewAdapter<Z: Detailable, T: Aggregate<Z>>(val content: T) : RecyclerView.Adapter<GenericListRecyclerViewAdapter<Z,T>.ContentViewHolder>() {
+class GenericListRecyclerViewAdapter<Z: Mapeable, T: Aggregate<Z>>(val content: T) : RecyclerView.Adapter<GenericListRecyclerViewAdapter<Z,T>.ContentViewHolder>() {
 
     var onClickListener : View.OnClickListener? = null
     lateinit var context: Context
@@ -30,9 +30,9 @@ class GenericListRecyclerViewAdapter<Z: Detailable, T: Aggregate<Z>>(val content
 
     override fun onBindViewHolder(holder: ContentViewHolder?, position: Int) {
 
-        val contentImage= content.get(position).get_Image()
-        val contentName = content.get(position).get_Name()
-        val contentAddress = content.get(position).get_Address()
+        val contentImage= content.get(position).getEntityImage()
+        val contentName = content.get(position).getEntityName()
+        val contentAddress = content.get(position).getEntityAddress()
 
         holder?.bindShop(contentImage, contentName, contentAddress)
     }
