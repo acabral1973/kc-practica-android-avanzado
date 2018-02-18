@@ -10,13 +10,14 @@ import com.keepcoding.madridshops.repository.RepositoryImpl
 import com.keepcoding.madridshops.repository.model.DataEntity
 import java.lang.ref.WeakReference
 
-class GetAllShopsInteractorImpl(context: Context) : GetAllShopsInteractor {
+class GetAllShopsInteractorImpl(queryType: String, context: Context) : GetAllShopsInteractor {
 
     private val weakContext = WeakReference<Context>(context)
     private val repository : Repository = RepositoryImpl(weakContext.get() !!)
+    private val entityType = queryType
 
     override fun execute(success: SuccessCompletion<Shops>, error: ErrorCompletion) {
-        repository.getAllShops(success = {
+        repository.getAllEntities(entityType, success = {
             val shops: Shops = entityMapper(it)
             success.successCompletion(shops)
         }, error = {
