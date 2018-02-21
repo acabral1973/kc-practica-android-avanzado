@@ -29,13 +29,13 @@ class ShopDAO
 
         content.put(DBConstants.KEY_SHOP_ID_JSON, dataEntity.id)
         content.put(DBConstants.KEY_SHOP_NAME , dataEntity.name)
-        content.put(DBConstants.KEY_SHOP_DESCRIPTION , dataEntity.description_en)
+        content.put(DBConstants.KEY_SHOP_DESCRIPTION , dataEntity.description_es)
         content.put(DBConstants.KEY_SHOP_LATITUDE, dataEntity.gps_lat)
         content.put(DBConstants.KEY_SHOP_LONGITUDE, dataEntity.gps_lon)
         content.put(DBConstants.KEY_SHOP_IMAGE_URL , dataEntity.img)
         content.put(DBConstants.KEY_SHOP_LOGO_IMAGE_URL , dataEntity.logo_img)
         content.put(DBConstants.KEY_SHOP_ADDRESS , dataEntity.address)
-        content.put(DBConstants.KEY_SHOP_OPENING_HOURS , dataEntity.opening_hours_en)
+        content.put(DBConstants.KEY_SHOP_OPENING_HOURS , dataEntity.opening_hours_es)
 
         return content
     }

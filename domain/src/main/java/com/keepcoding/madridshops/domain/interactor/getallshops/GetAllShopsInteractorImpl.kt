@@ -29,7 +29,7 @@ class GetAllShopsInteractorImpl(queryType: String, context: Context) : GetAllSho
 
         val tempList = ArrayList <MadridShopEntity>()
         list.forEach {
-            val entity = MadridShopEntity(it.id.toInt(), it.databaseId.toInt(),it.name,it.description_en, it.gps_lat, it.gps_lon,it.img, it.logo_img, it.opening_hours_en, it.address)
+            val entity = MadridShopEntity(it.id.toInt(), it.databaseId.toInt(),it.name,it.description_es, it.gps_lat, it.gps_lon,it.img, it.logo_img, it.opening_hours_es, it.address)
             tempList.add(entity)
         }
         val entitiesList = MadridShopEntities(tempList)

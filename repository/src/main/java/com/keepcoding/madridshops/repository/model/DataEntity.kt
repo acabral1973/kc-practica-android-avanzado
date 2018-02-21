@@ -7,11 +7,11 @@ data class DataEntity(
         val id: Long,
         val databaseId: Long,
         val name: String,
-        val description_en: String,
+        val description_es: String,
         var gps_lat: String,
         val gps_lon: String,
         val img: String,
         val logo_img: String,
-        val opening_hours_en: String,
+        val opening_hours_es: String,
         val address: String
 )
