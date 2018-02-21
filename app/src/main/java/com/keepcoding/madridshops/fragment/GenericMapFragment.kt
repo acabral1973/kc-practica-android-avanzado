@@ -64,7 +64,7 @@ class GenericMapFragment<T: Mapeable>: SupportMapFragment() {
     }
 
     private fun centerMapInPosition(map: GoogleMap, latitude: Double, longitude: Double) {
-        val cameraPosition = CameraPosition.Builder().target(LatLng(latitude, longitude)).zoom(17f).build()
+        val cameraPosition = CameraPosition.Builder().target(LatLng(latitude, longitude)).zoom(15f).build()
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
     }
 
@@ -88,8 +88,11 @@ class GenericMapFragment<T: Mapeable>: SupportMapFragment() {
         val address = elementToShow.getEntityAddress()
         val lat = elementToShow.getEntityLat().toDouble()
         val lon = elementToShow.getEntityLon().toDouble()
+        val markerColor = 170f   // HUE value for colorAccent
 
-        val mappedMarker = map.addMarker(MarkerOptions().position(LatLng(lat,lon)).title(name).snippet(address))
+        val mappedMarker = map.addMarker(MarkerOptions().position(LatLng(lat,lon)).
+                                                        title(name).
+                                                        snippet(address))
         mappedMarker.tag = elementToShow
 
         map.setOnInfoWindowClickListener {

@@ -12,8 +12,8 @@ import com.keepcoding.madridshops.domain.interactor.SuccessCompletion
 import com.keepcoding.madridshops.domain.interactor.getallshops.GetAllShopsInteractor
 import com.keepcoding.madridshops.domain.interactor.getallshops.GetAllShopsInteractorImpl
 import com.keepcoding.madridshops.domain.interactor.getallshops.TypeConstants
-import com.keepcoding.madridshops.domain.model.MadridShopEntity
 import com.keepcoding.madridshops.domain.model.MadridShopEntities
+import com.keepcoding.madridshops.domain.model.MadridShopEntity
 import com.keepcoding.madridshops.fragment.GenericListFragment
 import com.keepcoding.madridshops.fragment.GenericMapFragment
 import kotlinx.android.synthetic.main.activity_main.*
@@ -23,7 +23,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         setSupportActionBar(toolbar)
+
         initializeEntities(TypeConstants.SHOP)
     }
 

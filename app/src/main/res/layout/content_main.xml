@@ -15,7 +15,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:layout_margin="@dimen/extra_small_margin"
+        android:layout_marginStart="@dimen/extra_small_margin"
+        android:layout_marginEnd="@dimen/extra_small_margin"
+        android:layout_marginTop="@dimen/extra_small_margin"
+        android:layout_marginBottom="@dimen/no_margin"
     />
 
     <FrameLayout

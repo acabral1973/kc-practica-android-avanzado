@@ -24,13 +24,19 @@ class GenericDetailActivity : AppCompatActivity() {
         fun <T: Mapeable> intent(context: Context, content: T): Intent {
 
             val intent = Intent(context, GenericDetailActivity::class.java)
+            val latitude = content.getEntityLat()
+            val longitude = content.getEntityLon()
+            val staticMapImage = "http://maps.googleapis.com/maps/api/staticmap?%20center=" +
+                                 latitude + "," + longitude +
+                                 "&zoom=17&size=3320x220&scale%20=2&markers=%7Ccolor:red%7C" +
+                                 latitude + "," + longitude
 
             intent.putExtra(EXTRA_NAME, content.getEntityName())
             intent.putExtra(EXTRA_ADDRESS, content.getEntityAddress())
             intent.putExtra(EXTRA_DESCRIPTION, content.getEntityDescription())
             intent.putExtra(EXTRA_HOURES, content.getEntityHoures())
             intent.putExtra(EXTRA_LOGO, content.getEntityLogo())
-            intent.putExtra(EXTRA_IMAGE, content.getEntityImage())
+            intent.putExtra(EXTRA_IMAGE, staticMapImage)
             this.context = context
             return intent
         }
@@ -48,9 +54,9 @@ class GenericDetailActivity : AppCompatActivity() {
         val imageExtra = intent.getStringExtra(EXTRA_IMAGE)
 
 
-        supportActionBar?.title = "Detalles"
-        Picasso.with(context).load(logoExtra).placeholder(android.R.drawable.alert_dark_frame).into(logo)
+        supportActionBar?.title = nameExtra
         Picasso.with(context).load(imageExtra).placeholder(android.R.drawable.alert_dark_frame).into(image)
+        Picasso.with(context).load(logoExtra).placeholder(android.R.drawable.alert_dark_frame).into(logo)
         name.text = nameExtra
         address.text = addressExtra
         houres.text = houresExtra
