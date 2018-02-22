@@ -54,7 +54,8 @@ class GenericDetailActivity : AppCompatActivity() {
         val imageExtra = intent.getStringExtra(EXTRA_IMAGE)
 
 
-        supportActionBar?.title = nameExtra
+        supportActionBar?.setTitle(nameExtra)
+
         Picasso.with(context).load(imageExtra).placeholder(android.R.drawable.alert_dark_frame).into(image)
         Picasso.with(context).load(logoExtra).placeholder(android.R.drawable.alert_dark_frame).into(logo)
         name.text = nameExtra

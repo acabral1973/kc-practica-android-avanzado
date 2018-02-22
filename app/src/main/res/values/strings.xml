@@ -12,4 +12,5 @@
     <string name="logo">Logo</string>
     <string name="data">Tiendas</string>
     <string name="activities">Actividades</string>
+    <string name="sub_title">sincronizando datos...</string>
 </resources>

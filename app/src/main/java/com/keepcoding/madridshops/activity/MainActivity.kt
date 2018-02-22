@@ -17,6 +17,7 @@ import com.keepcoding.madridshops.domain.model.MadridShopEntity
 import com.keepcoding.madridshops.fragment.GenericListFragment
 import com.keepcoding.madridshops.fragment.GenericMapFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_toolbar.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,15 +25,24 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Configuro la toolbar
         setSupportActionBar(toolbar)
 
+        // La vista por defecto se carga con Shops
         initializeEntities(TypeConstants.SHOP)
     }
 
     fun initializeEntities(entityType: String) {
+
         val getAllShopsInteractor: GetAllShopsInteractor = GetAllShopsInteractorImpl(entityType,this)
+
+        view_switcher.displayedChild = 0
+
         getAllShopsInteractor.execute(success = object: SuccessCompletion<MadridShopEntities>{
             override fun successCompletion(madridShopEntities: MadridShopEntities) {
+
+                view_switcher.displayedChild = 1
+
                 initializeListFragment(madridShopEntities)
                 initializeMapFragment(madridShopEntities)
             }
