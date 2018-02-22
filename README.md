@@ -15,10 +15,10 @@ La pantalla principal está controlada por un *ViewSwitcher* que muestra una *Pro
 El paso de **shops** a **activities** se hace mediante dos opciones de *Menú* que están siempre visibles en la *toolbar*.
 
 <p align="center">
-<img width=20% src="https://raw.githubusercontent.com/acabral1973/kc-practica-android-avanzado/master/images/downloading-screen.png"
+<img width=20% src="https://raw.githubusercontent.com/acabral1973/kc-practica-android-avanzado/master/images/downloading-screen.png">
 <img width=20% src="https://raw.githubusercontent.com/acabral1973/kc-practica-android-avanzado/master/images/shops-screen.png">
-<img width=20% src="https://raw.githubusercontent.com/acabral1973/kc-practica-android-avanzado/master/images/activities-screen.png"
-<img width=20% src="https://raw.githubusercontent.com/acabral1973/kc-practica-android-avanzado/master/images/detail-screen.png"
+<img width=20% src="https://raw.githubusercontent.com/acabral1973/kc-practica-android-avanzado/master/images/activities-screen.png">
+<img width=20% src="https://raw.githubusercontent.com/acabral1973/kc-practica-android-avanzado/master/images/detail-screen.png">
 </p>
 
 ## Licencia  
